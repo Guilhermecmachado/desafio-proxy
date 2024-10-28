@@ -14,5 +14,5 @@ Este projeto configura um ambiente com Nginx como proxy reverso para uma aplica�
    Clone este repositório para a sua máquina local.
 
    ```bash
-   git clone <URL_DO_SEU_REPOSITORIO>
-   cd <NOME_DO_DIRETORIO>
+   git clone <https://github.com/Guilhermecmachado/desafio-proxy.git>
+  
