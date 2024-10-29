@@ -19,6 +19,7 @@ services:
       MYSQL_DATABASE: test
     volumes:
       - db_data:/var/lib/mysql  # Mapeamento de volume do MySQL
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Arquivo de inicialização SQL no MySQL
     networks:
       - app-network
     healthcheck:
