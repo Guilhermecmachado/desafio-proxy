@@ -5,12 +5,13 @@ services:
     build:
       context: ./app
     volumes:
-      - ./app:/usr/src/app
+      - ./app:/usr/src/app               # Mapeia o código-fonte da aplicação
+      - /usr/src/app/node_modules        # Volume anônimo para evitar sobrescrita do node_modules
     networks:
       - app-network
     depends_on:
       db:
-        condition: service_healthy  # Espera o MySQL estar saudável
+        condition: service_healthy       # Aguarda até que o MySQL esteja saudável
 
   db:
     image: mysql:5.7
@@ -18,7 +19,7 @@ services:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: test
     volumes:
-      - db_data:/var/lib/mysql  # Mapeamento de volume do MySQL
+      - db_data:/var/lib/mysql           # Volume persistente do MySQL para manter os dados
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Arquivo de inicialização SQL no MySQL
     networks:
       - app-network
@@ -37,11 +38,11 @@ services:
     networks:
       - app-network
     depends_on:
-      - app  # Garante que o app esteja iniciado antes do nginx
+      - app  # Aguarda o app estar iniciado antes do nginx
 
 networks:
   app-network:
     driver: bridge
 
 volumes:
-  db_data:  # Define o volume para o banco de dados
+  db_data:  # Volume para o banco de dados
